@@ -5,7 +5,7 @@ import by.tms.partshop.entities.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LoginConverter {
+public class UserLoginConverter {
 
   public User fromDto(UserLoginDto loginData) {
     return User.builder()

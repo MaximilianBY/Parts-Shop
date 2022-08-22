@@ -2,6 +2,7 @@ package by.tms.partshop.entities;
 
 import by.tms.partshop.util.EmailConstraint;
 import by.tms.partshop.util.PasswordConstraint;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,4 +38,6 @@ public class User extends BaseEntity {
   private String email;
   @Column(name = "PHONE_NUMBER", nullable = false)
   private String phoneNumber;
+  @Column(name = "BALANCE", nullable = false)
+  private BigDecimal balance;
 }

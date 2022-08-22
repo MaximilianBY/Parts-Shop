@@ -8,12 +8,18 @@ import javax.validation.ConstraintValidatorContext;
 
 public class PasswordValidator implements ConstraintValidator<PasswordConstraint, UserLoginDto> {
 
-  private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()â€\"[{}]:;',?/*~$^+=<>]).{6,20}$";
-  private static final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+//  private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()â€\"[{}]:;',?/*~$^+=<>]).{6,20}$";
+//  private static final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+//
+//  @Override
+//  public boolean isValid(UserLoginDto userLoginDto, ConstraintValidatorContext context) {
+//    Matcher matcher = pattern.matcher(userLoginDto.getPassword());
+//    return matcher.matches();
+//  }
 
   @Override
-  public boolean isValid(UserLoginDto userLoginDto, ConstraintValidatorContext context) {
-    Matcher matcher = pattern.matcher(userLoginDto.getPassword());
-    return matcher.matches();
+  public boolean isValid(UserLoginDto userLoginDto, ConstraintValidatorContext constraintValidatorContext) {
+    return userLoginDto.getPassword() != null && userLoginDto.getPassword().matches("\\S+")
+        && (userLoginDto.getPassword().length() >= 6) && (userLoginDto.getPassword().length() < 30);
   }
 }
