@@ -8,6 +8,7 @@ import by.tms.partshop.dto.UserLoginDto;
 import by.tms.partshop.dto.converter.UserConverter;
 import by.tms.partshop.repositories.UserRepository;
 import by.tms.partshop.services.UserService;
+import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;

@@ -38,10 +38,10 @@ public class AuthenticationController {
   public ModelAndView login(@ModelAttribute @Valid UserLoginDto user, BindingResult bindingResult,
       ModelAndView modelAndView) throws AuthorizationException {
     if (bindingResult.hasErrors()) {
-      log.info("inside check errors");
-      populateError("login", modelAndView, bindingResult);
-      populateError("password", modelAndView, bindingResult);
+      populateError(LOGIN, modelAndView, bindingResult);
+      populateError(PASSWORD, modelAndView, bindingResult);
       modelAndView.setViewName(LOGIN_PAGE);
+      log.info("User " + user.getLogin() + " logged in.");
       return modelAndView;
     }
     return userService.authenticate(user);
