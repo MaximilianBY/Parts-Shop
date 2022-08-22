@@ -6,14 +6,14 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class LoginValidator implements ConstraintValidator<LoginConstraint, UserLoginDto> {
+public class LoginValidator implements ConstraintValidator<LoginConstraint, String> {
 
-  private static final String LOGIN_PATTERN = "^[a-zA-Z0-9_-]{5,15}$";
+  private static final String LOGIN_PATTERN = "^[A-Za-z0-9_-]{5,20}$";
   private static final Pattern pattern = Pattern.compile(LOGIN_PATTERN);
 
   @Override
-  public boolean isValid(UserLoginDto value, ConstraintValidatorContext context) {
-    Matcher matcher = pattern.matcher(value.getLogin());
+  public boolean isValid(String value, ConstraintValidatorContext context) {
+    Matcher matcher = pattern.matcher(value);
     return matcher.matches();
   }
 }

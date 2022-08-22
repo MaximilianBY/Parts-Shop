@@ -1,6 +1,7 @@
 package by.tms.partshop.entities;
 
 import by.tms.partshop.util.EmailConstraint;
+import by.tms.partshop.util.LoginConstraint;
 import by.tms.partshop.util.PasswordConstraint;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ import lombok.experimental.SuperBuilder;
 public class User extends BaseEntity {
 
   @Column(name = "LOGIN", nullable = false)
+  @LoginConstraint
   private String login;
   @Column(name = "PASSWORD", nullable = false)
   @PasswordConstraint

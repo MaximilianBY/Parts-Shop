@@ -1,6 +1,8 @@
 package by.tms.partshop.controllers;
 
 import static by.tms.partshop.util.constants.PagesPathConstants.LOGIN_PAGE;
+import static by.tms.partshop.util.constants.entityConstants.UserConstants.LOGIN;
+import static by.tms.partshop.util.constants.entityConstants.UserConstants.PASSWORD;
 
 import by.tms.partshop.dto.UserLoginDto;
 import by.tms.partshop.exceptions.AuthorizationException;
@@ -32,7 +34,7 @@ public class AuthenticationController {
     return new ModelAndView(LOGIN_PAGE);
   }
 
-  @PostMapping()
+  @PostMapping
   public ModelAndView login(@ModelAttribute @Valid UserLoginDto user, BindingResult bindingResult,
       ModelAndView modelAndView) throws AuthorizationException {
     if (bindingResult.hasErrors()) {
