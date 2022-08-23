@@ -77,9 +77,9 @@
         <label for="password">Password:</label>
         <input type="password" class="form-control w-25" id="password"
                placeholder="Enter password" name="password"
-        required>
-        <label for="password">Пароль должен содержать одну цифру, один строчный и один заглавный символ, специальный символ ("! @ # & ( )"), длина пароля должна быть от 8 до 20 символов</label>
-        <div class="invalid-feedback">Password should be entered!</div>
+               required>
+                <label for="password" style="display: none;" class="invalid-password">Пароль должен содержать одну цифру, один строчный и один заглавный символ, специальный символ ("! @ # & ( )"), длина пароля должна быть от 8 до 20 символов</label>
+        <div  class="invalid-feedback">Пароль должен содержать одну цифру, один строчный и один заглавный символ, специальный символ ("! @ # & ( )"), длина пароля должна быть от 8 до 20 символов</div>
         <label for="confirmPassword">Retype password:</label>
         <input type="password" class="form-control w-25" id="confirmPassword"
                placeholder="Retype password" name="confirmPassword"
@@ -94,6 +94,37 @@
   </div>
 </form>
 <script>
+  function isLoginMatch(e){
+    if (!/^[A-Za-z0-9_-]{5,20}$/.exec(e.target.value)) {
+      let attent = document.getElementsByClassName('invalid-feedback')[0];
+      attent.style.display = 'block';
+    }
+    else {
+      let attent = document.getElementsByClassName('invalid-feedback')[0];
+      attent.style.display = 'none';
+    }
+  }
+
+  function isPassMatch(e){
+    if (!/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()â€"[{}]:;',?~$^=<>]).{8,20}$/.exec(e.target.value)) {
+      let attent = document.getElementsByClassName('invalid-password')[0];
+      attent.style.display = 'block';
+    }
+    else {
+      let attent = document.getElementsByClassName('invalid-password')[0];
+      attent.style.display = 'none';
+    }
+  }
+
+  let loginInput = document.getElementById('login');
+  loginInput.addEventListener('blur', isLoginMatch);
+
+  let passInput = document.getElementById('password');
+  passInput.addEventListener('blur', isPassMatch);
+
+
+
+
   function isPasswordMatch() {
     var password = $("#password").val();
     var confirmPassword = $("#confirmPassword").val();
@@ -104,11 +135,9 @@
       $("#divCheckPassword").html("Passwords match.");
     }
   }
-
   $(document).ready(function () {
     $("#confirm_password").keyup(isPasswordMatch);
   });
-
   document.getElementById('saveBtn').disabled = true;
   document.getElementById('login').addEventListener('keyup', e => {
     //Check for the input's value
@@ -127,5 +156,6 @@
     }
   });
 </script>
+
 </body>
 </html>
