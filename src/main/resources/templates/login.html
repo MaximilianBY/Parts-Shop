@@ -44,6 +44,7 @@
     <h2>Login</h2>
     <p>Please, enter your credentials</p>
     <form method="POST" th:action="@{/login}" class="needs-validation" novalidate>
+      <span th:text="${logError}"></span>
       <div class="form-group">
         <label for="login">Login:</label>
         <input type="text" class="form-control w-25" id="login"

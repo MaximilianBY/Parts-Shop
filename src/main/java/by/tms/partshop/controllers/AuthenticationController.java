@@ -41,7 +41,6 @@ public class AuthenticationController {
       populateError(LOGIN, modelAndView, bindingResult);
       populateError(PASSWORD, modelAndView, bindingResult);
       modelAndView.setViewName(LOGIN_PAGE);
-      log.info("User " + user.getLogin() + " logged in.");
       return modelAndView;
     }
     return userService.authenticate(user);
