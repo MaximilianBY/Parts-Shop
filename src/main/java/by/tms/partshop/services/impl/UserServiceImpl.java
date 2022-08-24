@@ -6,10 +6,12 @@ import static by.tms.partshop.util.constants.PagesPathConstants.REGISTRATION_PAG
 import by.tms.partshop.dto.NewUserDto;
 import by.tms.partshop.dto.UserLoginDto;
 import by.tms.partshop.dto.converter.UserConverter;
+import by.tms.partshop.exceptions.AuthorizationException;
 import by.tms.partshop.repositories.UserRepository;
 import by.tms.partshop.services.UserService;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,12 +30,15 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public ModelAndView authenticate(UserLoginDto user) {
-    if (userRepository.existsUserByLoginAndPassword(user.getLogin(), user.getPassword())) {
-      log.info("login successful");
-      return new ModelAndView();
+    try {
+      if (userRepository.existsUserByLoginAndPassword(user.getLogin(), user.getPassword())) {
+        log.info("login successful");
+        return new ModelAndView();
+      } throw new  AuthorizationException("User does not exist");
+    } catch (AuthorizationException e) {
+      log.info(e.getMessage());
+      return new ModelAndView(LOGIN_PAGE, HttpStatus.BAD_REQUEST.);
     }
-    log.info("no match");
-    return null;
   }
 
   @Override

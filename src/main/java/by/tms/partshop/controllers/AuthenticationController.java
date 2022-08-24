@@ -36,7 +36,7 @@ public class AuthenticationController {
 
   @PostMapping
   public ModelAndView login(@ModelAttribute @Valid UserLoginDto user, BindingResult bindingResult,
-      ModelAndView modelAndView) throws AuthorizationException {
+      ModelAndView modelAndView) {
     if (bindingResult.hasErrors()) {
       populateError(LOGIN, modelAndView, bindingResult);
       populateError(PASSWORD, modelAndView, bindingResult);
