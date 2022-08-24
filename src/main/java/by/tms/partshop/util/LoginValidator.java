@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class LoginValidator implements ConstraintValidator<LoginConstraint, String> {
 
-  private static final String LOGIN_PATTERN = "^[A-Za-z0-9_-]{5,20}$";
+  private static final String LOGIN_PATTERN = "^[a-zA-Z][a-zA-Z0-9-_\\.]{5,20}$";
   private static final Pattern pattern = Pattern.compile(LOGIN_PATTERN);
 
   @Override
