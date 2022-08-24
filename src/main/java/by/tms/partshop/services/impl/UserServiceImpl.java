@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
       } throw new  AuthorizationException("User does not exist");
     } catch (AuthorizationException e) {
       log.info(e.getMessage());
-      return new ModelAndView(LOGIN_PAGE, HttpStatus.BAD_REQUEST.);
+      return new ModelAndView(LOGIN_PAGE, HttpStatus.BAD_REQUEST);
     }
   }
 
