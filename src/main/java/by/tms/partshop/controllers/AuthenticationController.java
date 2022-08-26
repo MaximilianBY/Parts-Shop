@@ -8,6 +8,7 @@ import by.tms.partshop.dto.UserLoginDto;
 import by.tms.partshop.exceptions.AuthorizationException;
 import by.tms.partshop.services.UserService;
 import java.util.Objects;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -36,14 +37,14 @@ public class AuthenticationController {
 
   @PostMapping
   public ModelAndView login(@ModelAttribute @Valid UserLoginDto user, BindingResult bindingResult,
-      ModelAndView modelAndView) {
+      ModelAndView modelAndView, HttpSession session) {
     if (bindingResult.hasErrors()) {
       populateError(LOGIN, modelAndView, bindingResult);
       populateError(PASSWORD, modelAndView, bindingResult);
       modelAndView.setViewName(LOGIN_PAGE);
       return modelAndView;
     }
-    return userService.authenticate(user);
+    return userService.authenticate(user, session);
   }
 
   private void populateError(String field, ModelAndView modelAndView, BindingResult bindingResult) {

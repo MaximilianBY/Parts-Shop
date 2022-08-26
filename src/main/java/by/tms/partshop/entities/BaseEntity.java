@@ -1,5 +1,6 @@
 package by.tms.partshop.entities;
 
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class BaseEntity {
 
   @Id
-  @Column(name = "ID")
+  @Column(name = "ID", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 }

@@ -10,6 +10,7 @@ import by.tms.partshop.exceptions.AuthorizationException;
 import by.tms.partshop.repositories.UserRepository;
 import by.tms.partshop.services.UserService;
 import java.util.Arrays;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public ModelAndView authenticate(UserLoginDto user) {
+  public ModelAndView authenticate(UserLoginDto user, HttpSession session) {
     try {
       if (userRepository.existsUserByLoginAndPassword(user.getLogin(), user.getPassword())) {
         log.info("login successful");
