@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
   public ModelAndView authenticate(UserLoginDto user, HttpSession session) {
     try {
       if (userRepository.existsUserByLoginAndPassword(user.getLogin(), user.getPassword())) {
-        log.info("login successful");
+        session.setAttribute("userId", userRepository.getUserId(user.getLogin()));
+        log.info("Login successful");
         return new ModelAndView();
       } throw new  AuthorizationException("User does not exist");
     } catch (AuthorizationException e) {
@@ -47,7 +48,6 @@ public class UserServiceImpl implements UserService {
     try {
       userRepository.save(userConverter.newUserFromDto(userDto));
     } catch (Exception e) {
-      e.getStackTrace();
       log.info(e.getMessage());
       return new ModelAndView(REGISTRATION_PAGE);
     }
