@@ -23,4 +23,5 @@ public class CarDto {
   private String engineFeatures;
   private Integer year;
   private String color;
+  private String vin;
 }

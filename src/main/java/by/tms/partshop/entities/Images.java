@@ -2,6 +2,7 @@ package by.tms.partshop.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,11 +19,11 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "Images")
 public class Images extends BaseEntity {
 
-  @ManyToOne
-  @JoinColumn(name = "CAR_INDEX")
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "CAR_ID", referencedColumnName = "ID")
   private Car car;
-  @ManyToOne
-  @JoinColumn(name = "PART_INDEX")
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "PART_INDEX", referencedColumnName = "PART_INDEX")
   private Part part;
   @Column(name = "IMAGE_PATHS", nullable = false)
   private String imagePath;

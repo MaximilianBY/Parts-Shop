@@ -24,7 +24,7 @@ import lombok.experimental.SuperBuilder;
 public class Part extends BaseEntity {
 
   @Column(name = "PART_INDEX", nullable = false)
-  private int partIndex;
+  private long partIndex;
   @Column(name = "PART_TYPE", nullable = false)
   private String partType;
   @Column(name = "CONSTRUCTION_NUMBER")

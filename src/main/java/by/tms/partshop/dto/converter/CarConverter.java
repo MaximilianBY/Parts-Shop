@@ -20,6 +20,7 @@ public class CarConverter {
         .typeFuel(carDto.getTypeFuel())
         .engineCC(carDto.getEngineCC())
         .engineFeatures(carDto.getEngineFeatures())
+        .vin(carDto.getVin())
         .build();
   }
 }
