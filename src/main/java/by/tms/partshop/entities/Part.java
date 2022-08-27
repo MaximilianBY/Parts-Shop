@@ -1,6 +1,7 @@
 package by.tms.partshop.entities;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,5 +35,5 @@ public class Part extends BaseEntity {
   @Column(name = "PRICE")
   private BigDecimal price;
   @OneToMany(mappedBy = "part", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-  private Set<Images> images;
+  private List<Images> images;
 }

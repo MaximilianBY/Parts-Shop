@@ -16,7 +16,7 @@ public class ImagesConverter {
 
   public Images fromDto(ImagesDto imagesDto) {
     return Images.builder()
-        .car(carRepository.findById(imagesDto.getId()))
+        .car(carRepository.findById(imagesDto.getCarId()))
         .imagePath(imagesDto.getImagePath())
         .build();
   }
