@@ -8,4 +8,5 @@ import org.springframework.web.servlet.ModelAndView;
 public interface IUserService {
   ModelAndView authenticate(UserLoginDto user, HttpSession session);
   ModelAndView registration(NewUserDto userDto);
+
 }
