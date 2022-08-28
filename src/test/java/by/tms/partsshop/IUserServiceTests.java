@@ -6,6 +6,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-public class UserServiceTests {
+public class IUserServiceTests {
 
 }

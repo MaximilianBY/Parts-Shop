@@ -3,11 +3,11 @@ package by.tms.partshop.services.impl;
 import static by.tms.partshop.util.constants.PagesPathConstants.ADMIN_PAGE;
 
 import by.tms.partshop.dto.CarDto;
-import by.tms.partshop.dto.ImagesDto;
 import by.tms.partshop.dto.converter.CarConverter;
 import by.tms.partshop.entities.Car;
 import by.tms.partshop.repositories.CarRepository;
-import by.tms.partshop.services.CarService;
+import by.tms.partshop.services.ICarService;
+import by.tms.partshop.services.IImageService;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.BufferedReader;
@@ -16,6 +16,7 @@ import java.io.Reader;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,15 +26,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Service
-public class CarServiceImpl implements CarService {
+@AllArgsConstructor
+public class CarServiceImpl implements ICarService {
 
   private CarConverter carConverter;
   private CarRepository carRepository;
-
-  public CarServiceImpl(CarConverter carConverter, CarRepository carRepository) {
-    this.carConverter = carConverter;
-    this.carRepository = carRepository;
-  }
+  private IImageService IImageService;
 
   @Override
   public ModelAndView saveCars(MultipartFile file) throws Exception {
@@ -47,6 +45,7 @@ public class CarServiceImpl implements CarService {
         .orElse(null);
     if (Optional.ofNullable(cars).isPresent()) {
       cars.forEach(carRepository::save);
+      IImageService.saveImages(file);
       modelMap.addAttribute("categoryUploadMessage", HttpStatus.ACCEPTED);
       return new ModelAndView(ADMIN_PAGE, modelMap);
     }

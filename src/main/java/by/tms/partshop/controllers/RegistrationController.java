@@ -3,8 +3,10 @@ package by.tms.partshop.controllers;
 import static by.tms.partshop.util.constants.PagesPathConstants.REGISTRATION_PAGE;
 
 import by.tms.partshop.dto.NewUserDto;
-import by.tms.partshop.services.UserService;
+import by.tms.partshop.services.IUserService;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,15 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+@Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
 
-  private final UserService userService;
-
-  public RegistrationController(UserService userService) {
-    this.userService = userService;
-  }
+  private final IUserService IUserService;
 
   @GetMapping
   public ModelAndView openRegistrationPage() {
@@ -31,7 +31,7 @@ public class RegistrationController {
   @PostMapping
   public ModelAndView addNewUser(@ModelAttribute @Valid NewUserDto user, Errors errors)
       throws Exception {
-    return userService.registration(user);
+    return IUserService.registration(user);
   }
 
   @ModelAttribute()

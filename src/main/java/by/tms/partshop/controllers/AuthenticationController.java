@@ -1,15 +1,15 @@
 package by.tms.partshop.controllers;
 
 import static by.tms.partshop.util.constants.PagesPathConstants.LOGIN_PAGE;
-import static by.tms.partshop.util.constants.entityConstants.UserConstants.LOGIN;
-import static by.tms.partshop.util.constants.entityConstants.UserConstants.PASSWORD;
+import static by.tms.partshop.util.constants.ShopConstants.LOGIN;
+import static by.tms.partshop.util.constants.ShopConstants.PASSWORD;
 
 import by.tms.partshop.dto.UserLoginDto;
-import by.tms.partshop.exceptions.AuthorizationException;
-import by.tms.partshop.services.UserService;
+import by.tms.partshop.services.IUserService;
 import java.util.Objects;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/login")
 public class AuthenticationController {
 
-  private UserService userService;
-
-  public AuthenticationController(UserService userService) {
-    this.userService = userService;
-  }
+  private IUserService IUserService;
 
   @GetMapping
   public ModelAndView openLoginPage() {
@@ -44,7 +41,7 @@ public class AuthenticationController {
       modelAndView.setViewName(LOGIN_PAGE);
       return modelAndView;
     }
-    return userService.authenticate(user, session);
+    return IUserService.authenticate(user, session);
   }
 
   private void populateError(String field, ModelAndView modelAndView, BindingResult bindingResult) {

@@ -1,5 +1,6 @@
 package by.tms.partshop.repositories;
 
+import by.tms.partshop.dto.UserDataDto;
 import by.tms.partshop.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
   @Query(value = "SELECT ID FROM PARTS_SHOP.USERS WHERE LOGIN > :login",
       nativeQuery = true)
   long getUserId(String login);
+
+  UserDataDto getUserById(long id);
 }

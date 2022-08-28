@@ -2,7 +2,8 @@ package by.tms.partshop.controllers;
 
 import static by.tms.partshop.util.constants.PagesPathConstants.ADMIN_PAGE;
 
-import by.tms.partshop.services.CarService;
+import by.tms.partshop.services.ICarService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,15 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/admins")
 public class AdminController {
 
-  private CarService carService;
-
-  public AdminController(CarService carService) {
-    this.carService = carService;
-  }
+  private ICarService ICarService;
 
   @GetMapping
   public ModelAndView openUploadPage() {
@@ -29,15 +27,14 @@ public class AdminController {
   }
 
   @PostMapping("/upload/cars")
-  public ModelAndView uploadCategoriesFromFile(@RequestParam("file") MultipartFile file)
+  public ModelAndView uploadCars(@RequestParam("file") MultipartFile file)
       throws Exception {
-    return carService.saveCars(file);
+    return ICarService.saveCars(file);
   }
 
-//  @PostMapping("/upload/product")
-//  public ResponseEntity<Set<ProductDto>> uploadProductsFromFile(
-//      @RequestParam("file") MultipartFile file) throws Exception {
-//    return new ResponseEntity<>(productService.saveProductsFromFile(file), HttpStatus.CREATED);
+//  @PostMapping("/upload/parts")
+//  public ModelAndView uploadImages(@RequestParam("file") MultipartFile file) throws Exception {
+//    return new ModelAndView();
 //  }
 //
 //  @GetMapping(value = "/download/products.csv")
