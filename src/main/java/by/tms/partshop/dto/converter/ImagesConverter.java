@@ -21,4 +21,12 @@ public class ImagesConverter {
         .imagePath(imagesDto.getImagePath())
         .build();
   }
+
+  public ImagesDto toDto(Images images) {
+    return ImagesDto.builder()
+        .carIndex(images.getCar().getCarIndex())
+        .partIndex(images.getPart().getPartIndex())
+        .imagePath(images.getImagePath())
+        .build();
+  }
 }

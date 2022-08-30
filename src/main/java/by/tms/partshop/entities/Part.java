@@ -1,15 +1,12 @@
 package by.tms.partshop.entities;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -29,8 +26,6 @@ public class Part extends BaseEntity {
 
   @Column(name = "PART_INDEX", nullable = false)
   private long partIndex;
-  @Column(name = "ADDITIONAL")
-  private String additional;
   @Column(name = "CONSTRUCTION_NUMBER")
   private String constructionNumber;
   @Column(name = "DESCRIPTION")
@@ -38,10 +33,13 @@ public class Part extends BaseEntity {
   @Column(name = "PRICE")
   private BigDecimal price;
   @Column(name = "IN_STOCK", nullable = false)
-  private boolean isAvailableToBuy;
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "ID", nullable = false, referencedColumnName = "ID")
+  private short isAvailableToBuy;
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "ID", nullable = false, referencedColumnName = "ID", insertable = false, updatable = false)
   private PartType partType;
+  @ManyToOne(optional = false, fetch = FetchType.LAZY)
+  @JoinColumn(name = "ID", nullable = false, referencedColumnName = "ID", insertable = false, updatable = false)
+  private PartTypeAdditional additional;
   @ManyToOne
   @JoinColumn(name = "CAR_IDX", nullable = false, referencedColumnName = "CAR_INDEX")
   private Car car;

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface PartTypeAdditionalRepository extends JpaRepository<PartTypeAdditional, Long> {
 
   PartTypeAdditional getByPartType_IdAndId(long partTypeId, long partTypeAdditionalId);
+  PartTypeAdditional getByTypeDescription(String typeDescription);
 }

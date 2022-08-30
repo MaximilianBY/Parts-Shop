@@ -2,13 +2,12 @@ package by.tms.partshop.services.impl;
 
 import static by.tms.partshop.util.constants.PagesPathConstants.ADMIN_PAGE;
 
-import by.tms.partshop.dto.PartDto;
-import by.tms.partshop.dto.converter.PartConverter;
-import by.tms.partshop.entities.Part;
-import by.tms.partshop.repositories.PartRepository;
-import by.tms.partshop.services.IImageService;
-import by.tms.partshop.services.IPartAdditionalService;
-import by.tms.partshop.services.IPartService;
+import by.tms.partshop.dto.PartTypeAdditionalDto;
+import by.tms.partshop.dto.PartTypeDto;
+import by.tms.partshop.dto.converter.PartTypeConverter;
+import by.tms.partshop.entities.PartType;
+import by.tms.partshop.entities.PartTypeAdditional;
+import by.tms.partshop.repositories.PartTypeRepository;
 import by.tms.partshop.services.IPartTypeService;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -27,31 +26,25 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
-@Service
 @AllArgsConstructor
-public class PartServiceImpl implements IPartService {
+@Service
+public class PartTypeServiceImpl implements IPartTypeService {
 
-  private final PartRepository partRepository;
-  private final IImageService IImageService;
-  private final IPartTypeService partTypeService;
-  private final IPartAdditionalService additionalService;
-  private final PartConverter partConverter;
+  private final PartTypeRepository partTypeRepository;
+  private final PartTypeConverter typeConverter;
 
   @Override
-  public ModelAndView saveParts(MultipartFile file) throws Exception {
+  public ModelAndView savePartType(MultipartFile file) throws Exception {
     ModelMap modelMap = new ModelMap();
-    List<PartDto> csvFile = parseCsv(file);
+    List<PartTypeDto> csvFile = parseCsv(file);
     log.info(csvFile.toString());
-    List<Part> parts = Optional.ofNullable(csvFile)
+    List<PartType> partTypes = Optional.ofNullable(csvFile)
         .map(list -> list.stream()
-            .map(partConverter::fromDto)
+            .map(typeConverter::fromDto)
             .toList())
         .orElse(null);
-    if (Optional.ofNullable(parts).isPresent()) {
-      partTypeService.savePartType(file);
-      additionalService.saveAdditionalInfo(file);
-      parts.forEach(partRepository::save);
-      IImageService.saveImages(file);
+    if (Optional.ofNullable(csvFile).isPresent()) {
+      partTypes.forEach(partTypeRepository::save);
       modelMap.addAttribute("categoryUploadMessage", HttpStatus.ACCEPTED);
       return new ModelAndView(ADMIN_PAGE, modelMap);
     }
@@ -59,11 +52,11 @@ public class PartServiceImpl implements IPartService {
     return new ModelAndView(ADMIN_PAGE, modelMap);
   }
 
-  private List<PartDto> parseCsv(MultipartFile file) {
+  private List<PartTypeDto> parseCsv(MultipartFile file) {
     if (Optional.ofNullable(file).isPresent()) {
       try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-        CsvToBean<PartDto> csvToBean = new CsvToBeanBuilder(reader)
-            .withType(PartDto.class)
+        CsvToBean<PartTypeDto> csvToBean = new CsvToBeanBuilder(reader)
+            .withType(PartTypeDto.class)
             .withIgnoreLeadingWhiteSpace(true)
             .withSeparator(',')
             .build();
