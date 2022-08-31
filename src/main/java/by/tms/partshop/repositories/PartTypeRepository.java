@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PartTypeRepository extends JpaRepository<PartType, Long> {
   PartType getById(long id);
-  PartType getByType(String type);
+  PartType getByPartType(String partType);
+
+  PartType findByPartTypeIs(String partType);
 }

@@ -41,15 +41,14 @@ public class PartServiceImpl implements IPartService {
   public ModelAndView saveParts(MultipartFile file) throws Exception {
     ModelMap modelMap = new ModelMap();
     List<PartDto> csvFile = parseCsv(file);
-    log.info(csvFile.toString());
+    log.info(file.toString());
     List<Part> parts = Optional.ofNullable(csvFile)
         .map(list -> list.stream()
             .map(partConverter::fromDto)
             .toList())
         .orElse(null);
-    if (Optional.ofNullable(parts).isPresent()) {
-      partTypeService.savePartType(file);
-      additionalService.saveAdditionalInfo(file);
+    if (Optional.ofNullable(file).isPresent()) {
+//      log.info(parts.get(0).getCar().getCarIndex() + " " + parts.get(0).getCar().getId());
       parts.forEach(partRepository::save);
       IImageService.saveImages(file);
       modelMap.addAttribute("categoryUploadMessage", HttpStatus.ACCEPTED);

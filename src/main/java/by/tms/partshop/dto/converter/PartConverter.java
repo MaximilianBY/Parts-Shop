@@ -19,21 +19,22 @@ public class PartConverter {
   public Part fromDto(PartDto partDto) {
     return Part.builder()
         .partIndex(partDto.getPartIndex())
-        .car(carRepository.getByCarIndex(partDto.getCarIndex()))
-        .partType(partTypeRepository.getByType(partDto.getPartType()))
+        .car(carRepository.getByCarIdx(partDto.getCarIndex()))
+        .partType(partTypeRepository.getByPartType(partDto.getPartType()))
         .additional(additionalRepository.getByTypeDescription(partDto.getAdditional()))
         .constructionNumber(partDto.getConstructionNumber())
         .description(partDto.getDescription())
         .price(partDto.getPrice())
+        .availableToBuy(partDto.isAvailableToBuy())
         .build();
   }
 
   public PartDto toDto(Part part) {
     return PartDto.builder()
         .partIndex(part.getPartIndex())
-        .carIndex(part.getCar().getCarIndex())
-        .partTypeId(part.getPartType().getId())
-        .additionalId(part.getAdditional().getId())
+        .carIndex(part.getCar().getCarIdx())
+        .partType(part.getPartType().getPartType())
+        .additional(part.getAdditional().getTypeDescription())
         .constructionNumber(part.getConstructionNumber())
         .description(part.getDescription())
         .price(part.getPrice())

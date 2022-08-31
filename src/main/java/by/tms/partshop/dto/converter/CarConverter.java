@@ -9,7 +9,7 @@ public class CarConverter {
 
   public Car fromDto(CarDto carDto) {
     return Car.builder()
-        .carIndex(carDto.getCarIndex())
+        .carIdx(carDto.getCarIndex())
         .brand(carDto.getBrand())
         .model(carDto.getModel())
         .year(carDto.getYear())

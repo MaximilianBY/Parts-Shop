@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ImagesRepository extends JpaRepository<Images, Long> {
-  Images getByCar_CarIndex(String carIndex);
+  Images getByCar_CarIdx(String carIndex);
   Images getByPart_PartIndex(long partIndex);
 }

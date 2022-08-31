@@ -5,17 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class PartDto {
 
   private long partIndex;
-  private long partTypeId;
+  private String carIndex;
   private String partType;
-  private long additionalId;
   private String additional;
   private String constructionNumber;
   private String description;

@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface PartRepository extends JpaRepository<Part, Long> {
 
   Part getByPartIndex(long partIndex);
-
-  Part getByPartIndexAndAvailableToBuyIsTrue(long partIndex);
   boolean findByPartIndexAndAvailableToBuyIsTrue(long partIndex);
 }

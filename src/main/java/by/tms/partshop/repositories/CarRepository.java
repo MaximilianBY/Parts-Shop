@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 public interface CarRepository extends JpaRepository<Car, Long> {
 
   Car findById(long id);
-  Car getByCarIndex(String carIndex);
-  @Query(value = "SELECT ID FROM PARTS_SHOP.CARS WHERE cars.CAR_INDEX > :carIndex",
+
+  Car getByCarIdx(String carIdx);
+
+  @Query(value = "SELECT ID FROM PARTS_SHOP.CARS WHERE CARS.CAR_INDEX > :carIndex",
       nativeQuery = true)
   long getCarId(String carIndex);
 }

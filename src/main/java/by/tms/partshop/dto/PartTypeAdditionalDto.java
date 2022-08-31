@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PartTypeAdditionalDto {
 
-  private long partTypeId;
+//  private long partTypeId;
   private String partType;
   private String typeDescription;
 }

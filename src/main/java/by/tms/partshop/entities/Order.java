@@ -28,5 +28,5 @@ public class Order extends BaseEntity {
   @Column(name = "ORDER_DATE", nullable = false)
   private LocalDate orderDate;
   @Column(name = "ORDER_PRICE", nullable = false)
-  private BigDecimal orderPrice;
+  private int orderPrice;
 }

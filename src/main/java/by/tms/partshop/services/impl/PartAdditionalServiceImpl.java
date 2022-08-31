@@ -42,6 +42,7 @@ public class PartAdditionalServiceImpl implements IPartAdditionalService {
             .toList())
         .orElse(null);
     if (Optional.ofNullable(additionals).isPresent()) {
+      log.info(additionals.get(0).getPartType().getId().toString());
       additionals.forEach(additionalRepository::save);
       modelMap.addAttribute("categoryUploadMessage", HttpStatus.ACCEPTED);
       return new ModelAndView(ADMIN_PAGE, modelMap);
@@ -55,7 +56,8 @@ public class PartAdditionalServiceImpl implements IPartAdditionalService {
       try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
         CsvToBean<PartTypeAdditionalDto> csvToBean = new CsvToBeanBuilder(reader)
             .withType(PartTypeAdditionalDto.class)
-            .withIgnoreLeadingWhiteSpace(true)
+            .withIgnoreLeadingWhiteSpace(false)
+            .withIgnoreEmptyLine(false)
             .withSeparator(',')
             .build();
 

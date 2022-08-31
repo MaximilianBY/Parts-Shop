@@ -1,11 +1,11 @@
 package by.tms.partshop.entities;
 
-import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,7 +21,7 @@ import lombok.experimental.SuperBuilder;
 @RequiredArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "Parts")
+@Table(name = "PARTS")
 public class Part extends BaseEntity {
 
   @Column(name = "PART_INDEX", nullable = false)
@@ -31,18 +31,20 @@ public class Part extends BaseEntity {
   @Column(name = "DESCRIPTION")
   private String description;
   @Column(name = "PRICE")
-  private BigDecimal price;
+  private int price;
   @Column(name = "IN_STOCK", nullable = false)
-  private short isAvailableToBuy;
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "ID", nullable = false, referencedColumnName = "ID", insertable = false, updatable = false)
+  private boolean availableToBuy;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "PART_TYPE", nullable = false, referencedColumnName = "ID")
   private PartType partType;
-  @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "ID", nullable = false, referencedColumnName = "ID", insertable = false, updatable = false)
-  private PartTypeAdditional additional;
+
   @ManyToOne
-  @JoinColumn(name = "CAR_IDX", nullable = false, referencedColumnName = "CAR_INDEX")
+  @JoinColumn(name = "ADDITIONAL_ID", nullable = false, referencedColumnName = "ID")
+  private PartTypeAdditional additional;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "CAR_ID", nullable = false, referencedColumnName = "ID")
   private Car car;
+
   @OneToOne(mappedBy = "part", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
   private Images images;
 }

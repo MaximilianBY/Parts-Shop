@@ -20,11 +20,11 @@ public class Cart {
     cart.add(addedPart);
   }
 
-  public BigDecimal getUserCartTotalPrice() {
+  public int getUserCartTotalPrice() {
     if (Optional.ofNullable(cart).isPresent()) {
       return cart.stream().map(PartDto::getPrice).reduce(BigDecimal::add).get();
     }
-    return new BigDecimal(0);
+    return 0;
   }
 
   public void delUnnecessaryPart(PartDto unnecessaryPart) {

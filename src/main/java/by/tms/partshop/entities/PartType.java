@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 public class PartType extends BaseEntity {
 
   @Column(name = "TYPE", nullable = false)
-  private String type;
+  private String partType;
   @OneToMany(mappedBy = "partType", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
   private List<Part> part;
   @OneToMany(mappedBy = "partType", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)

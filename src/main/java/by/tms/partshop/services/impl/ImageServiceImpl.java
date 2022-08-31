@@ -32,7 +32,7 @@ public class ImageServiceImpl implements IImageService {
 
   @Override
   public List<String> getAllCarImagePath(String carIndex) {
-    return Arrays.stream(imagesRepository.getByCar_CarIndex(carIndex)
+    return Arrays.stream(imagesRepository.getByCar_CarIdx(carIndex)
             .getImagePath()
             .split(";"))
         .toList();

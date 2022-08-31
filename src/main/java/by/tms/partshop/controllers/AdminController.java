@@ -3,7 +3,9 @@ package by.tms.partshop.controllers;
 import static by.tms.partshop.util.constants.PagesPathConstants.ADMIN_PAGE;
 
 import by.tms.partshop.services.ICarService;
+import by.tms.partshop.services.IPartAdditionalService;
 import by.tms.partshop.services.IPartService;
+import by.tms.partshop.services.IPartTypeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ public class AdminController {
 
   private final ICarService iCarService;
   private final IPartService iPartService;
+  private final IPartTypeService iPartTypeService;
+  private final IPartAdditionalService additionalService;
 
   @GetMapping
   public ModelAndView openUploadPage() {
@@ -35,9 +39,21 @@ public class AdminController {
   }
 
   @PostMapping("/upload/parts")
-  public ModelAndView uploadImages(@RequestParam("file") MultipartFile file) throws Exception {
+  public ModelAndView uploadParts(@RequestParam("file") MultipartFile file) throws Exception {
     return iPartService.saveParts(file);
   }
+
+  @PostMapping("/upload/partType")
+  public ModelAndView uploadPartTypes(@RequestParam("file") MultipartFile file) throws Exception {
+    return iPartTypeService.savePartType(file);
+  }
+
+  @PostMapping("/upload/additionalInfo")
+  public ModelAndView uploadAdditionalInfo(@RequestParam("file") MultipartFile file)
+      throws Exception {
+    return additionalService.saveAdditionalInfo(file);
+  }
+
 //
 //  @GetMapping(value = "/download/products.csv")
 //  public ModelAndView downloadProductsCsv(HttpServletResponse response) throws Exception {

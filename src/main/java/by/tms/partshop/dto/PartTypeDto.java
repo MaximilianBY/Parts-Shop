@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class PartTypeDto {
 
   private long id;
-  private String type;
+  private String partType;
 }

@@ -1,12 +1,11 @@
 package by.tms.partshop.entities;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,13 +21,13 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 @Setter
-@ToString
+//@ToString
 @Entity
 @Table(name = "CARS")
 public class Car extends BaseEntity {
 
   @Column(name = "CAR_INDEX", nullable = false)
-  private String carIndex;
+  private String carIdx;
   @Column(name = "BRAND")
   private String brand;
   @Column(name = "MODEL")
