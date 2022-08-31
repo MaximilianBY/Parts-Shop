@@ -22,7 +22,7 @@ public class Cart {
 
   public int getUserCartTotalPrice() {
     if (Optional.ofNullable(cart).isPresent()) {
-      return cart.stream().map(PartDto::getPrice).reduce(BigDecimal::add).get();
+      return cart.stream().mapToInt(PartDto::getPrice).sum();
     }
     return 0;
   }

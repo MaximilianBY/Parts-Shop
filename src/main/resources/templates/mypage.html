@@ -13,9 +13,10 @@
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
-    <img src="https://uploads.turbologo.com/uploads/design/hq_preview_image/87878/draw_svg20210814-32701-t5984m.svg.png"
-         alt="" width="30" height="30" class="d-inline-block align-text-top">
-    <a class="navbar-brand" th:href="@{/account}">Мой профиль</a>
+    <img
+        src="https://uploads.turbologo.com/uploads/design/hq_preview_image/87878/draw_svg20210814-32701-t5984m.svg.png"
+        alt="" width="30" height="30" class="d-inline-block align-text-top">
+    <a class="navbar-brand" th:href="@{/account}">Homepage</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
@@ -29,12 +30,29 @@
         <li class="nav-item">
           <a class="nav-link" th:href="@{/login}">Logout</a>
         </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Категории
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div th:if="${not #lists.isEmpty(categoties)}">
+                <div type="product" th:each="category : ${devices}">
+                  <a class="dropdown-item" href="#">Action</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <form th:action="@{/search}" class="d-flex">
+            <input class="form-control me-2" type="text" id="searchField" name="searchField"
+                   placeholder="Search">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </li>
       </ul>
-      <form th:action="@{/search}" class="d-flex">
-        <input class="form-control me-2" type="text" id="searchField" name="searchField"
-               placeholder="Search">
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>

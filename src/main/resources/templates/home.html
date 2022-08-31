@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <title>My Shop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"
@@ -19,8 +19,9 @@
 <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
-    <img src="https://uploads.turbologo.com/uploads/design/hq_preview_image/87878/draw_svg20210814-32701-t5984m.svg.png"
-         alt="" width="30" height="30" class="d-inline-block align-text-top">
+    <img
+        src="https://uploads.turbologo.com/uploads/design/hq_preview_image/87878/draw_svg20210814-32701-t5984m.svg.png"
+        alt="" width="30" height="30" class="d-inline-block align-text-top">
     <a class="navbar-brand" th:href="@{/account}">Homepage</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#mynavbar">
@@ -35,12 +36,29 @@
         <li class="nav-item">
           <a class="nav-link" th:href="@{/login}">Logout</a>
         </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Категории
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div th:if="${not #lists.isEmpty(categoties)}">
+                <div type="product" th:each="category : ${devices}">
+                  <a class="dropdown-item" href="#">Action</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <form th:action="@{/search}" class="d-flex">
+            <input class="form-control me-2" type="text" id="searchField" name="searchField"
+                   placeholder="Search">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </li>
       </ul>
-      <form th:action="@{/search}" class="d-flex">
-        <input class="form-control me-2" type="text" id="searchField" name="searchField"
-               placeholder="Search">
-        <button class="btn btn-primary" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
@@ -48,11 +66,14 @@
   <div class="container" style="margin-top:10px">
     <div class="col-md-8 mx-auto">
       <div class="card mb-3">
-        <img src="https://cloudshop.ru/portal/wp-content/uploads/2017/05/salesssss-920x644.jpg" class="card-img-top" alt="...">
+        <img src="https://cloudshop.ru/portal/wp-content/uploads/2017/05/salesssss-920x644.jpg"
+             class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Скидки до 20% на весь ассортимент!</h5>
-          <p class="card-text">C 01.08.2022 по 05.09.2022 дейсивует скидки абсолютно на все товары, представленные в каталоге!
-          При заказе скажите оператору кодовую фразу "Teach Me Skills" и купите товары дешевле :) Ждём Вас!</p>
+          <p class="card-text">C 01.08.2022 по 05.09.2022 дейсивует скидки абсолютно на все товары,
+            представленные в каталоге!
+            При заказе скажите оператору кодовую фразу "Teach Me Skills" и купите товары дешевле :) Ждём
+            Вас!</p>
         </div>
       </div>
       <div class="card mb-3">
@@ -63,15 +84,15 @@
         </div>
       </div>
       <div class="card mb-3">
-      <img src="https://klub-ok.by/images/blog/41/banner-novoe-postuplenie-dekabr-2018-1000x690-1.jpg" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Следите за новостями на сайте.</h5>
-        <p class="card-text">Наш магазин старается подобрать для Вас лучшие товары. Наши сотрудники стараются улучшить качество ассортимента,
-          чтобы Вы не искали автозапчасти у ненадёжных продавцов.</p>
+        <img src="https://klub-ok.by/images/blog/41/banner-novoe-postuplenie-dekabr-2018-1000x690-1.jpg"
+             alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Следите за новостями на сайте.</h5>
+          <p class="card-text">Наш магазин старается подобрать для Вас лучшие товары. Наши сотрудники
+            стараются улучшить качество ассортимента,
+            чтобы Вы не искали автозапчасти у ненадёжных продавцов.</p>
+        </div>
       </div>
-    </div>
-
-
     </div>
   </div>
 </div>
