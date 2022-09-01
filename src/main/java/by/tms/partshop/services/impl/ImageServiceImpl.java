@@ -32,7 +32,7 @@ public class ImageServiceImpl implements IImageService {
 
   @Override
   public List<String> getAllCarImagePath(String carIndex) {
-    return Arrays.stream(imagesRepository.getByCar_CarIdx(carIndex)
+    return Arrays.stream(imagesRepository.getByCar_CarIndex(carIndex)
             .getImagePath()
             .split(";"))
         .toList();
@@ -47,13 +47,26 @@ public class ImageServiceImpl implements IImageService {
   }
 
   @Override
-  public void saveImages(MultipartFile file) throws Exception {
-    ModelMap modelMap = new ModelMap();
+  public void saveCarImages(MultipartFile file) throws Exception {
     List<ImagesDto> csvImages = parseCsv(file);
     log.info(csvImages.toString());
     List<Images> images = Optional.ofNullable(csvImages)
         .map(list -> list.stream()
-            .map(imagesConverter::fromDto)
+            .map(imagesConverter::imagesCarFromDto)
+            .toList())
+        .orElse(null);
+    if (Optional.ofNullable(images).isPresent()) {
+      images.forEach(imagesRepository::save);
+    }
+  }
+
+  @Override
+  public void savePartImages(MultipartFile file) throws Exception {
+    List<ImagesDto> csvImages = parseCsv(file);
+    log.info(csvImages.toString());
+    List<Images> images = Optional.ofNullable(csvImages)
+        .map(list -> list.stream()
+            .map(imagesConverter::imagesPartFromDto)
             .toList())
         .orElse(null);
     if (Optional.ofNullable(images).isPresent()) {

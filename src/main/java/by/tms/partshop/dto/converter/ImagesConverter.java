@@ -14,17 +14,30 @@ public class ImagesConverter {
   private CarRepository carRepository;
   private PartRepository partRepository;
 
-  public Images fromDto(ImagesDto imagesDto) {
+  public Images imagesCarFromDto(ImagesDto imagesDto) {
     return Images.builder()
-        .car(carRepository.getByCarIdx(imagesDto.getCarIndex()))
+        .car(carRepository.getByCarIndex(imagesDto.getCarIndex()))
+        .imagePath(imagesDto.getImagePath())
+        .build();
+  }
+
+  public ImagesDto imagesCarToDto(Images images) {
+    return ImagesDto.builder()
+        .carId(images.getCar().getId())
+        .carIndex(images.getCar().getCarIndex())
+        .imagePath(images.getImagePath())
+        .build();
+  }
+
+  public Images imagesPartFromDto(ImagesDto imagesDto) {
+    return Images.builder()
         .part(partRepository.getByPartIndex(imagesDto.getPartIndex()))
         .imagePath(imagesDto.getImagePath())
         .build();
   }
 
-  public ImagesDto toDto(Images images) {
+  public ImagesDto imagesPartToDto(Images images) {
     return ImagesDto.builder()
-        .carIndex(images.getCar().getCarIdx())
         .partIndex(images.getPart().getPartIndex())
         .imagePath(images.getImagePath())
         .build();

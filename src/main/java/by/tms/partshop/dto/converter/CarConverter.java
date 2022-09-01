@@ -9,7 +9,7 @@ public class CarConverter {
 
   public Car fromDto(CarDto carDto) {
     return Car.builder()
-        .carIdx(carDto.getCarIndex())
+        .carIndex(carDto.getCarIndex())
         .brand(carDto.getBrand())
         .model(carDto.getModel())
         .year(carDto.getYear())
@@ -21,6 +21,17 @@ public class CarConverter {
         .engineCC(carDto.getEngineCC())
         .engineFeatures(carDto.getEngineFeatures())
         .vin(carDto.getVin())
+        .build();
+  }
+
+  public CarDto toDto(Car car){
+    return CarDto.builder()
+        .carIndex(car.getCarIndex())
+        .brand(car.getBrand())
+        .model(car.getModel())
+        .body(car.getBody())
+        .year(car.getYear())
+        .vin(car.getVin())
         .build();
   }
 }

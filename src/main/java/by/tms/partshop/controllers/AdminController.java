@@ -2,12 +2,15 @@ package by.tms.partshop.controllers;
 
 import static by.tms.partshop.util.constants.PagesPathConstants.ADMIN_PAGE;
 
+import by.tms.partshop.entities.Car;
+import by.tms.partshop.repositories.CarRepository;
 import by.tms.partshop.services.ICarService;
 import by.tms.partshop.services.IPartAdditionalService;
 import by.tms.partshop.services.IPartService;
 import by.tms.partshop.services.IPartTypeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,7 @@ public class AdminController {
   private final IPartService iPartService;
   private final IPartTypeService iPartTypeService;
   private final IPartAdditionalService additionalService;
+  private final CarRepository carRepository;
 
   @GetMapping
   public ModelAndView openUploadPage() {
@@ -52,6 +56,13 @@ public class AdminController {
   public ModelAndView uploadAdditionalInfo(@RequestParam("file") MultipartFile file)
       throws Exception {
     return additionalService.saveAdditionalInfo(file);
+  }
+  @PostMapping("/print/car")
+  public ModelAndView printCar(@RequestParam("text") String input){
+    ModelMap modelMap = new ModelMap();
+    Car car = carRepository.getByCarIndex(input);
+    modelMap.addAttribute("outputmess", car.toString());
+    return new ModelAndView(ADMIN_PAGE, modelMap);
   }
 
 //

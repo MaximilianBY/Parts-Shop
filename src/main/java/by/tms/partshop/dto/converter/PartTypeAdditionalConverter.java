@@ -14,7 +14,7 @@ public class PartTypeAdditionalConverter {
 
   public PartTypeAdditional fromDto(PartTypeAdditionalDto typeAdditionalDto) {
     return PartTypeAdditional.builder()
-        .partType(typeRepository.getByPartType(typeAdditionalDto.getPartType()))
+        .partType(typeRepository.getByType(typeAdditionalDto.getPartType()))
         .typeDescription(typeAdditionalDto.getTypeDescription())
         .build();
   }
@@ -22,7 +22,7 @@ public class PartTypeAdditionalConverter {
   public PartTypeAdditionalDto toDto(PartTypeAdditional additional) {
     return PartTypeAdditionalDto.builder()
 //        .partTypeId(additional.getPartType().getId())
-        .partType(additional.getPartType().getPartType())
+        .partType(additional.getPartType().getType())
         .typeDescription(additional.getTypeDescription())
         .build();
   }

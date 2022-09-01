@@ -11,14 +11,14 @@ public class PartTypeConverter {
 
   public PartType fromDto(PartTypeDto typeDto) {
     return PartType.builder()
-        .partType(typeDto.getPartType())
+        .type(typeDto.getPartType())
         .build();
   }
 
   public PartTypeDto toDto(PartType type) {
     return PartTypeDto.builder()
         .id(type.getId())
-        .partType(type.getPartType())
+        .partType(type.getType())
         .build();
   }
 }

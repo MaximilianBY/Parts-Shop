@@ -45,7 +45,7 @@ public class CarServiceImpl implements ICarService {
         .orElse(null);
     if (Optional.ofNullable(cars).isPresent()) {
       cars.forEach(carRepository::save);
-      IImageService.saveImages(file);
+      IImageService.saveCarImages(file);
       modelMap.addAttribute("categoryUploadMessage", HttpStatus.ACCEPTED);
       return new ModelAndView(ADMIN_PAGE, modelMap);
     }

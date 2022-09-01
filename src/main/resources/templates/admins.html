@@ -91,6 +91,18 @@
             </div>
           </form>
       </td>
+      <td>
+        <form method="POST" th:action="@{admins/print/car}">
+          <div class="custom-file mb-3">
+            <input type="text" id="text" name="text">
+          </div>
+          <span th:text="${outputmess}"></span>
+
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </td>
 <!--      <td>-->
 <!--        <div class="mt-3">-->
 <!--          <a th:href="@{/db.eshop/download/products.csv}">-->

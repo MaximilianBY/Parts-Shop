@@ -18,12 +18,17 @@ import java.util.regex.Pattern;
 @Service
 public class SearchServiceImpl {
 
-    public ModelAndView getSearchResult(String searchQuery) throws Exception {
+  private PartRepository partRepository;
+
+  @Override
+    public ModelAndView getSearchResult(HttpSession session) {
+        String searchQuery = (String) session.getAttribute("searchQuery");
         ModelMap modelMap = new ModelMap();
-        List<Product> allProducts = productDao.read();
-        List<Product> searchResult = new ArrayList<>(searchProducts(allProducts, searchQuery));
-        modelMap.addAttribute(PRODUCTS_FROM_SEARCH, searchResult);
-        return new ModelAndView(SEARCH_PAGE.getPath(), modelMap);
+        List<Part> allProducts = partRepository.findAll();
+        List<Part> searchResult = new ArrayList<>(searchProducts(allProducts, searchQuery));
+//        modelMap.addAttribute(PRODUCTS_FROM_SEARCH, searchResult);
+//        return new ModelAndView(SEARCH_PAGE.getPath(), modelMap);
+    return new ModelAndView();
     }
 
     private Set<Product> searchProducts(List<Product> allProducts, String query) {

@@ -1,15 +1,15 @@
 package by.tms.partshop.services.impl;
 
 import static by.tms.partshop.util.constants.PagesPathConstants.ADMIN_PAGE;
+import static by.tms.partshop.util.constants.PagesPathConstants.PART_PAGE;
+import static by.tms.partshop.util.constants.ShopConstants.PART;
 
 import by.tms.partshop.dto.PartDto;
 import by.tms.partshop.dto.converter.PartConverter;
 import by.tms.partshop.entities.Part;
 import by.tms.partshop.repositories.PartRepository;
 import by.tms.partshop.services.IImageService;
-import by.tms.partshop.services.IPartAdditionalService;
 import by.tms.partshop.services.IPartService;
-import by.tms.partshop.services.IPartTypeService;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.BufferedReader;
@@ -33,8 +33,6 @@ public class PartServiceImpl implements IPartService {
 
   private final PartRepository partRepository;
   private final IImageService IImageService;
-  private final IPartTypeService partTypeService;
-  private final IPartAdditionalService additionalService;
   private final PartConverter partConverter;
 
   @Override
@@ -48,9 +46,8 @@ public class PartServiceImpl implements IPartService {
             .toList())
         .orElse(null);
     if (Optional.ofNullable(file).isPresent()) {
-//      log.info(parts.get(0).getCar().getCarIndex() + " " + parts.get(0).getCar().getId());
       parts.forEach(partRepository::save);
-      IImageService.saveImages(file);
+      IImageService.savePartImages(file);
       modelMap.addAttribute("categoryUploadMessage", HttpStatus.ACCEPTED);
       return new ModelAndView(ADMIN_PAGE, modelMap);
     }

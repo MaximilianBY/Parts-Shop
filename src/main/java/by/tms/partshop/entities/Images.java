@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 public class Images extends BaseEntity {
 
   @OneToOne(optional = true, fetch = FetchType.LAZY)
-  @JoinColumn(name = "CAR_IDX", referencedColumnName = "CAR_INDEX")
+  @JoinColumn(name = "CAR_ID", referencedColumnName = "ID")
   private Car car;
   @OneToOne(optional = true, fetch = FetchType.LAZY)
   @JoinColumn(name = "PART_IDX", referencedColumnName = "PART_INDEX")

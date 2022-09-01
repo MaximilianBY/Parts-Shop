@@ -10,7 +10,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
   Car findById(long id);
 
-  Car getByCarIdx(String carIdx);
+  Car getByCarIndex(String carIndex);
 
   @Query(value = "SELECT ID FROM PARTS_SHOP.CARS WHERE CARS.CAR_INDEX > :carIndex",
       nativeQuery = true)

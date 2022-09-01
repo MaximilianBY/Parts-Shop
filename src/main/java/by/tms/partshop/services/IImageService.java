@@ -9,5 +9,6 @@ public interface IImageService {
 
   List<String> getAllPartImagePath(long partIndex);
 
-  void saveImages(MultipartFile file) throws Exception;
+  void saveCarImages(MultipartFile file) throws Exception;
+  void savePartImages(MultipartFile file) throws Exception;
 }

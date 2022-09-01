@@ -13,7 +13,8 @@ import lombok.ToString;
 @ToString
 public class PartDto {
 
-  private long partIndex;
+  private Long partIndex;
+  private Long carId;
   private String carIndex;
   private String partType;
   private String additional;

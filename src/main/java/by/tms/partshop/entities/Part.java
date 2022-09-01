@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Getter
@@ -25,7 +26,7 @@ import lombok.experimental.SuperBuilder;
 public class Part extends BaseEntity {
 
   @Column(name = "PART_INDEX", nullable = false)
-  private long partIndex;
+  private Long partIndex;
   @Column(name = "CONSTRUCTION_NUMBER")
   private String constructionNumber;
   @Column(name = "DESCRIPTION")
@@ -34,17 +35,18 @@ public class Part extends BaseEntity {
   private int price;
   @Column(name = "IN_STOCK", nullable = false)
   private boolean availableToBuy;
-  @ManyToOne(optional = false)
+  @ManyToOne
+  @JoinColumn(name = "CAR_ID", nullable = false, referencedColumnName = "ID")
+  private Car car;
+  @ManyToOne
   @JoinColumn(name = "PART_TYPE", nullable = false, referencedColumnName = "ID")
   private PartType partType;
 
   @ManyToOne
-  @JoinColumn(name = "ADDITIONAL_ID", nullable = false, referencedColumnName = "ID")
+  @JoinColumn(name = "ADDITIONAL_ID", referencedColumnName = "ID")
   private PartTypeAdditional additional;
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "CAR_ID", nullable = false, referencedColumnName = "ID")
-  private Car car;
 
   @OneToOne(mappedBy = "part", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+  @ToString.Exclude
   private Images images;
 }

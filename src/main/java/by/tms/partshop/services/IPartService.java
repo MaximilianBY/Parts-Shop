@@ -5,5 +5,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface IPartService {
 
+  ModelAndView getPartData(long partId);
   ModelAndView saveParts(MultipartFile file) throws Exception;
 }

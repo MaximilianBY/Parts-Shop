@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ImagesDto {
 
+  private long carId;
   private String carIndex;
   private long partIndex;
   private String imagePath;
