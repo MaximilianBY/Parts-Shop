@@ -1,5 +1,9 @@
 package by.tms.partshop.services.impl;
 
+import by.tms.partshop.entities.Part;
+import by.tms.partshop.repositories.PartRepository;
+import by.tms.partshop.services.ISearchService;
+import javax.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +20,7 @@ import java.util.regex.Pattern;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class SearchServiceImpl {
+public class SearchServiceImpl implements ISearchService {
 
   private PartRepository partRepository;
 
@@ -31,32 +35,46 @@ public class SearchServiceImpl {
     return new ModelAndView();
     }
 
-    private Set<Product> searchProducts(List<Product> allProducts, String query) {
-        Set<Product> products = new HashSet<>();
-        products.addAll(searchByName(allProducts, query));
+    private Set<Part> searchProducts(List<Part> allProducts, String query) {
+        Set<Part> products = new HashSet<>();
+        products.addAll(searchByPartType(allProducts, query));
         products.addAll(searchByDescription(allProducts, query));
+        products.addAll(searchByDescription(allProducts, query));
+
+
         return products;
     }
 
-    private List<Product> searchByName (List<Product> allProducts, String query) {
-        List<Product> newProductList = new ArrayList<>();
-        for(Product product : allProducts) {
-            Matcher matcher = Pattern.compile("\\b" + query + "\\b", Pattern.CASE_INSENSITIVE).matcher(product.getName());
+    private List<Part> searchByPartType(List<Part> allProducts, String query) {
+        List<Part> newProductList = new ArrayList<>();
+        for(Part part : allProducts) {
+            Matcher matcher = Pattern.compile("\\b" + query + "\\b", Pattern.CASE_INSENSITIVE).matcher(part.getPartType().getType());
             while (matcher.find()) {
-                newProductList.add(product);
+                newProductList.add(part);
             }
         }
         return newProductList;
     }
 
-    private List<Product> searchByDescription (List<Product> allProducts, String query) {
-        List<Product> newProductList = new ArrayList<>();
-        for(Product product : allProducts) {
-            Matcher matcher = Pattern.compile("\\b" + query + "\\b", Pattern.CASE_INSENSITIVE).matcher(product.getDescription());
+    private List<Part> searchByDescription (List<Part> allProducts, String query) {
+        List<Part> newProductList = new ArrayList<>();
+        for(Part part : allProducts) {
+            Matcher matcher = Pattern.compile("\\b" + query + "\\b", Pattern.CASE_INSENSITIVE).matcher(part.getDescription());
             while (matcher.find()) {
-                newProductList.add(product);
+                newProductList.add(part);
             }
         }
         return newProductList;
     }
+
+  private List<Part> searchByCar (List<Part> allProducts, String query) {
+    List<Part> newProductList = new ArrayList<>();
+    for(Part part : allProducts) {
+      Matcher matcher = Pattern.compile("\\b" + query + "\\b", Pattern.CASE_INSENSITIVE).matcher(part.getCar().getBrand());
+      while (matcher.find()) {
+        newProductList.add(part);
+      }
+    }
+    return newProductList;
+  }
 }

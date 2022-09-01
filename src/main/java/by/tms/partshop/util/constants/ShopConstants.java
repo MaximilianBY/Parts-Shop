@@ -13,4 +13,5 @@ public final class ShopConstants {
   public static final String PART = "part";
   public static final String TOTAL_PRICE = "totalPrice";
   public static final String PART_INDEX = "partIndex";
+  public static final String PART_ID = "partId";
 }

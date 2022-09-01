@@ -73,4 +73,11 @@ public class PartServiceImpl implements IPartService {
     }
     return Collections.emptyList();
   }
+
+  @Override
+  public ModelAndView getPartData(long partId) {
+    ModelMap modelMap = new ModelMap();
+    modelMap.addAttribute(PART, partConverter.toDto(partRepository.getById(partId)));
+    return new ModelAndView(PART_PAGE, modelMap);
+  }
 }

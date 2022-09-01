@@ -10,4 +10,6 @@ public final class PagesPathConstants {
   public static final String ADMIN_PAGE = "admins";
   public static final String MY_PAGE = "mypage";
   public static final String CART_PAGE = "cart";
+  public static final String HOME_PAGE = "home";
+  public static final String PART_PAGE = "part";
 }
