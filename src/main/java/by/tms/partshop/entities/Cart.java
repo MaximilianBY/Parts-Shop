@@ -1,19 +1,20 @@
 package by.tms.partshop.entities;
 
 import by.tms.partshop.dto.PartDto;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import lombok.Getter;
 
-@Getter
 public class Cart {
 
   private List<PartDto> cart;
 
   public Cart() {
     this.cart = new ArrayList<>();
+  }
+
+  public List<PartDto> getCart() {
+    return cart;
   }
 
   public void addPartToCart(PartDto addedPart) {
@@ -27,9 +28,9 @@ public class Cart {
     return 0;
   }
 
-  public void delUnnecessaryPart(PartDto unnecessaryPart) {
+  public void delUnnecessaryPart(long partCode) {
     cart.removeIf(
-        part -> part.getPartIndex() == unnecessaryPart.getPartIndex());
+        part -> part.getPartCode() == partCode);
   }
 
   public void clear() {

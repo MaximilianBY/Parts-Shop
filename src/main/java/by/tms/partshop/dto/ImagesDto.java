@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ImagesDto {
 
   private long carId;
-  private String carIndex;
-  private long partIndex;
+  private String carCode;
+  private long partCode;
   private String imagePath;
 }

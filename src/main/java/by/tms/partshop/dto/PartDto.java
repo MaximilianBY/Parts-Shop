@@ -13,13 +13,16 @@ import lombok.ToString;
 @ToString
 public class PartDto {
 
-  private Long partIndex;
+  private Long id;
+  private Long partCode;
   private Long carId;
-  private String carIndex;
-  private String partType;
-  private String additional;
+  private String carCode;
+  private String type;
+  private String direction;
+  private String side;
   private String constructionNumber;
   private String description;
   private int price;
   private boolean availableToBuy;
+  private String imagePath;
 }

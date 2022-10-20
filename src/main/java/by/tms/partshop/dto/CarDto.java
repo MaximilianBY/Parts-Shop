@@ -1,6 +1,5 @@
 package by.tms.partshop.dto;
 
-import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarDto {
 
-  private String carIndex;
+  private String carCode;
   private String brand;
   private String model;
   private String body;

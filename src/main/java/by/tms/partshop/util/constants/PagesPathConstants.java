@@ -12,4 +12,8 @@ public final class PagesPathConstants {
   public static final String CART_PAGE = "cart";
   public static final String HOME_PAGE = "home";
   public static final String PART_PAGE = "part";
+  public static final String ERROR_PAGE = "error";
+  public static final String SEARCH_PAGE = "search";
+  public static final String FILTER_PAGE = "filter";
+
 }

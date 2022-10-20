@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "by")
@@ -18,8 +21,9 @@ public class PartsShopApplication {
     this.environment = environment;
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws TelegramApiException {
     SpringApplication.run(PartsShopApplication.class, args);
+    TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
   }
 
   @Bean(name = "dataSource")

@@ -1,7 +1,7 @@
 package by.tms.partshop.dto.converter;
 
 import by.tms.partshop.dto.PartTypeDto;
-import by.tms.partshop.entities.PartType;
+import by.tms.partshop.entities.partSpecification.Type;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,16 +9,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class PartTypeConverter {
 
-  public PartType fromDto(PartTypeDto typeDto) {
-    return PartType.builder()
-        .type(typeDto.getPartType())
+  public Type fromDto(PartTypeDto typeDto) {
+    return Type.builder()
+        .type(typeDto.getType())
         .build();
   }
 
-  public PartTypeDto toDto(PartType type) {
+  public PartTypeDto toDto(Type type) {
     return PartTypeDto.builder()
         .id(type.getId())
-        .partType(type.getType())
+        .type(type.getType())
         .build();
   }
 }

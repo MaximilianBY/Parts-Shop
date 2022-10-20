@@ -19,7 +19,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class BaseEntity {
 
   @Id
-  @Column(name = "ID", nullable = false)
+  @Column(name = "id", nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 }

@@ -1,19 +1,18 @@
 package by.tms.partshop.repositories;
 
-import by.tms.partshop.dto.UserDataDto;
 import by.tms.partshop.entities.User;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-  boolean existsUserByLoginAndPassword(String login, String password);
+  User getUserByLogin(String string);
 
-  @Query(value = "SELECT ID FROM PARTS_SHOP.USERS WHERE LOGIN > :login",
-      nativeQuery = true)
-  long getUserId(String login);
+  User getUserByChatId_ChatId(Long chatId);
 
-  UserDataDto getUserById(long id);
+  Optional<User> findUserByLogin(String login);
+
+  User getUserById(long id);
 }

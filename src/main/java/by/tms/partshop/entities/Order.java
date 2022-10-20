@@ -1,11 +1,14 @@
 package by.tms.partshop.entities;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,14 +22,16 @@ import lombok.extern.slf4j.Slf4j;
 @SuperBuilder
 @Data
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders")
 public class Order extends BaseEntity {
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "USER_ID", nullable = false, referencedColumnName = "id")
+  @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
   private User user;
-  @Column(name = "ORDER_DATE", nullable = false)
+  @Column(name = "order_date", nullable = false)
   private LocalDate orderDate;
-  @Column(name = "ORDER_PRICE", nullable = false)
+  @Column(name = "order_price", nullable = false)
   private int orderPrice;
+  @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+  private List<OrderDetails> orderDetailsList;
 }

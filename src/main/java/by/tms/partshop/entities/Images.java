@@ -1,5 +1,7 @@
 package by.tms.partshop.entities;
 
+import by.tms.partshop.entities.carSpecification.Car;
+import by.tms.partshop.entities.partSpecification.Part;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,15 +18,15 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Data
 @Entity
-@Table(name = "Images")
+@Table(name = "images")
 public class Images extends BaseEntity {
 
-  @OneToOne(optional = true, fetch = FetchType.LAZY)
-  @JoinColumn(name = "CAR_ID", referencedColumnName = "ID")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "car_id", referencedColumnName = "id")
   private Car car;
-  @OneToOne(optional = true, fetch = FetchType.LAZY)
-  @JoinColumn(name = "PART_IDX", referencedColumnName = "PART_INDEX")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "part_id", referencedColumnName = "id")
   private Part part;
-  @Column(name = "IMAGE_PATHS", nullable = false)
+  @Column(name = "image_paths", nullable = false)
   private String imagePath;
 }

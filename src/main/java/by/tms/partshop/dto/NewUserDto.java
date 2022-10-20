@@ -1,7 +1,5 @@
 package by.tms.partshop.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +18,6 @@ public class NewUserDto {
   private String birthday;
   private String email;
   private String phoneNumber;
+  private String role;
+  private String chatId;
 }

@@ -1,9 +1,10 @@
 package by.tms.partshop.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
+import by.tms.partshop.entities.partSpecification.Part;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,11 +16,14 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Data
 @Entity
-@Table(name = "ORDER_DETAILS")
-public class OrderDetails {
+@Table(name = "order_details")
+public class OrderDetails extends BaseEntity {
 
-  @EmbeddedId
-  @JsonIgnore
-  private OrderDetailsId orderDetailsId;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "order_id", nullable = false)
+  private Order order;
 
+  @OneToOne(optional = false)
+  @JoinColumn(name = "part_id", nullable = false)
+  private Part part;
 }

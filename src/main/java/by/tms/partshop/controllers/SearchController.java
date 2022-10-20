@@ -1,21 +1,33 @@
 package by.tms.partshop.controllers;
 
+import by.tms.partshop.dto.SearchParamsDto;
+import by.tms.partshop.services.basicServices.ISearchService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+@Slf4j
+@AllArgsConstructor
 @RestController
 @RequestMapping("/search")
 public class SearchController {
-//
-//  private ProductService productService;
-//
-//  public SearchController(ProductService productService) {
-//    this.productService = productService;
-//  }
-//
-//  @GetMapping
-//  public ModelAndView getResultFromSearchRequest(@RequestParam("searchField") String searchField)
-//      throws Exception {
-//    return productService.findProductsFromRequest(searchField);
-//  }
+
+  private final ISearchService searchService;
+
+  @PostMapping
+  public ModelAndView getResultFromSearchRequest(@ModelAttribute SearchParamsDto searchParamsDto,
+      @RequestParam(defaultValue = "0") int pageNumber,
+      @RequestParam(defaultValue = "15") int pageSize) {
+    return searchService.searchQuery(searchParamsDto, pageNumber, pageSize);
+  }
+
+  @ModelAttribute
+  public SearchParamsDto setUpSearchForm() {
+    return new SearchParamsDto();
+  }
 }
