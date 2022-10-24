@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                     .and()
                     .formLogin()
                     .loginPage("/login")
+                    .failureUrl("/login?error=true")
                     .usernameParameter("login")
                     .passwordParameter("password")
                     .permitAll()

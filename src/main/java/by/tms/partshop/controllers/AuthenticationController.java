@@ -17,7 +17,6 @@ public class AuthenticationController {
 
   @GetMapping
   public ModelAndView openLoginPage() {
-    log.info("login page");
     return new ModelAndView(LOGIN_PAGE);
   }
 }

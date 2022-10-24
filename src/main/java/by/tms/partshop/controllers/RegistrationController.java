@@ -30,7 +30,7 @@ public class RegistrationController {
   }
 
   @PostMapping
-  public ModelAndView addNewUser(@ModelAttribute @Validated NewUserDto user, Errors errors) {
+  public ModelAndView addNewUser(@ModelAttribute @Validated NewUserDto user) {
     return userService.registration(user);
   }
 
